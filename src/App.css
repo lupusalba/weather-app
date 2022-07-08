@@ -31,8 +31,21 @@
   visibility: 0.8;
 }
 
-.otherData {
-  font-size: 1.7em;
-  visibility: 0.8;
+.searchBar {
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50px;
 }
 
+.search {
+  width: 200px;
+  margin-top: 20vh;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50px;
+  margin-left: calc(50vw - 100px);
+}
+
+.title {
+  font-size: 50px;
+}
