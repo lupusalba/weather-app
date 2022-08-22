@@ -26,6 +26,7 @@ hr {
   position: relative;
   height: 100vh;
   width: 100vw;
+  min-width: 100%;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -43,7 +44,7 @@ hr {
 .smallContainerWeather { 
   position: absolute;
   height: 250px;
-  width: 500px;
+  min-width: 550px;
   left: 100px;
   bottom: 50px;
   color: #fff;
@@ -142,10 +143,6 @@ hr {
   transition: transform 300ms ease;
 }
 
-.asideWeatherData {
-
-}
-
 .weatherInfo {
   display: flex;
   flex-direction: column;
@@ -160,4 +157,40 @@ hr {
   
   justify-content: space-between;
   flex-direction: row;
+}
+
+
+
+
+@media (min-width: 561px) and (max-width: 1250px) {
+  body { overflow:  hidden; }
+
+  #wrapper { display: block; width: 100%;}
+
+  .smallContainerWeather {
+    width: 50vw;
+    position: relative;
+    margin: auto;
+    left: auto;
+    bottom: auto;
+  }
+
+  .aside { width: 50vw; }
+}
+
+@media (max-width: 560px) {
+  body { overflow:  hidden; }
+  #wrapper { display: block;}
+  .smallContainerWeather,
+  .aside {
+    width: 100vw;
+  }
+  .smallContainerWeather {
+    position: relative;
+    margin: auto;
+    left: auto;
+    bottom: auto;
+    width: 100%;
+  }
+  .aside { height: auto;}
 }
