@@ -4,7 +4,19 @@
   text-align: center;
 }
 
+body {
+  margin: 0;
+}
 
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+/* 
 .weatherApp{
   background-color: aliceblue;
   width: 100%;
@@ -48,4 +60,115 @@
 
 .title {
   font-size: 50px;
+} */
+
+
+#wrapper {
+  position: relative;
+  height: 100vh;
+  width: calc(100vw - 17px);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+}
+/*******************************************
+    #mainData
+*******************************************/
+
+#mainData {
+  width: 100%;
+}
+
+
+
+
+
+
+/*******************************************
+    .aside
+*******************************************/
+.aside {
+  width: 33vw;
+  height: 100%;
+  display: inline-block;
+  border: 1px solid #000;
+  backdrop-filter: blur(10px);
+  color: #fff;
+}
+
+.asideCities { border-bottom: 1px solid #000; }
+
+.search {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.search input {
+  height: 40px;
+  width: 80%;
+  padding: 0 20px;
+  margin: 0 auto;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background-color: transparent;
+}
+
+.search input:focus-visible {
+  outline: none;
+}
+
+#searchIcon {
+  height: 50px;
+  width: 50px;
+  display: inline-block;
+  padding: 5px;
+}
+
+.search button {
+  height: 100px;
+  width: 100px;
+  background-color: transparent;
+  border: none;
+}
+
+.search button:hover {
+  border-bottom: 2px solid #000;
+}
+
+.citiesList {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  align-items: flex-start;
+}
+
+.citiesList li,
+.weatherInfo li  {
+  height: 50px;
+  line-height: 50px;
+  padding: 0px 50px;
+}
+
+.asideWeatherData {
+
+}
+
+.weatherInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: flex-start;
+}
+
+.weatherInfo li {
+  width: 100%;
+  display: flex;
+  
+  justify-content: space-between;
+  flex-direction: row;
 }
