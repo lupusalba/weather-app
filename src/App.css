@@ -16,57 +16,16 @@ li {
   list-style: none;
 }
 
-/* 
-.weatherApp{
-  background-color: aliceblue;
-  width: 100%;
-  height: 100vh;
-  overflow-y: hidden;
+hr {
+  width: 80%;
+  margin: 0 auto;
+  border: 1px solid #000;
 }
-
-.weatherMain {
-  display: block;
-  margin-top: 10vh;
-}
-
-
-.temperature {
-  font-size: 4em;
-}
-
-.temperature span {
-  visibility: 0.7;
-}
-
-.location {
-  font-size: 1.5em;
-  visibility: 0.8;
-}
-
-.searchBar {
-  height: 40px;
-  line-height: 40px;
-  border-radius: 50px;
-}
-
-.search {
-  width: 200px;
-  margin-top: 20vh;
-  height: 40px;
-  line-height: 40px;
-  border-radius: 50px;
-  margin-left: calc(50vw - 100px);
-}
-
-.title {
-  font-size: 50px;
-} */
-
 
 #wrapper {
   position: relative;
   height: 100vh;
-  width: calc(100vw - 17px);
+  width: 100vw;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -78,26 +37,48 @@ li {
 
 #mainData {
   width: 100%;
+  position: relative;
+}
+
+.smallContainerWeather { 
+  position: absolute;
+  height: 250px;
+  width: 500px;
+  left: 100px;
+  bottom: 50px;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  backdrop-filter: blur(10px);
 }
 
 
+.temperature {
+  font-size: 8em;
+}
 
+.location {
+  font-size: 1.7em;
+}
 
-
+.weatherDetails {
+  display: flex;
+  flex-direction: column;
+}
 
 /*******************************************
     .aside
 *******************************************/
 .aside {
   width: 33vw;
+  min-width: 550px;
   height: 100%;
   display: inline-block;
-  border: 1px solid #000;
   backdrop-filter: blur(10px);
   color: #fff;
 }
-
-.asideCities { border-bottom: 1px solid #000; }
 
 .search {
   display: flex;
@@ -151,6 +132,14 @@ li {
   height: 50px;
   line-height: 50px;
   padding: 0px 50px;
+}
+
+.citiesList > li { transform: scale(1) }
+
+.citiesList > li:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+  transition: transform 300ms ease;
 }
 
 .asideWeatherData {

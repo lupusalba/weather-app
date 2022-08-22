@@ -61,15 +61,15 @@ function App() {
   const [cities, setCities] = useState({})
 
   const search = e => {
-    // if (e.key === "Enter") {
-    //   fetch(`${api.base}weather?q=${location}&units=metric&APPID=${api.key}`)
-    //     .then(response => response.json())
-    //     .then(result => {
-    //       setWeather(result)
-    //       setLocation("")
-    //       console.log(result)
-    //     })
-    // }
+    if (e.key === "Enter") {
+      fetch(`${api.base}weather?q=${location}&units=metric&APPID=${api.key}`)
+        .then(response => response.json())
+        .then(result => {
+          setWeather(result)
+          setLocation("")
+          console.log(result)
+        })
+    }
   }
 
 
@@ -95,59 +95,55 @@ function App() {
   const showCityData = (e) => {
     let cityName = e.target.id
 
-    // fetch(`${api.base}weather?q=${cityName}&units=metric&APPID=${api.key}`)
-    //     .then(response => response.json())
-    //     .then(result => {
-    //       setWeather(result)
-    //       setLocation("")
-    //       console.log(result)
-    //     })
+    fetch(`${api.base}weather?q=${cityName}&units=metric&APPID=${api.key}`)
+        .then(response => response.json())
+        .then(result => {
+          setWeather(result)
+          setLocation("")
+          console.log(result)
+        })
   }
+
+
+  if (Object.keys(weather).length) {
+    fetch(`${api.base}weather?q=Berlin&units=metric&APPID=${api.key}`)
+    .then(response => response.json())
+    .then(result => {
+      setWeather(result)
+      setLocation("")
+      console.log(result)
+    })
+  }
+
+  console.log(weather)
 
   return (
     <div className="weatherApp" style={backgroundImage}>
 
-      {/* <div className="search">
-        <input
-          type="text"
-          className="searchBar"
-          placeholder="Search Location"
-          onChange={e => setLocation(e.target.value)}
-          value={location}
-          onKeyDown={search}
-        />
-      </div> */}
 
-      {/* {(typeof weather.main != "undefined") ? ( */}
       <div id="wrapper">
 
-        {/* <div className="LocationData">
-          <div className="location">{weather.name}, {weather.sys.country}</div>
-          <div className="date">{findDate(new Date())}</div>
-        </div>
-
-        <div className="weatherData">
-          <div className="temperature">{Math.round(weather.main.temp)}°c</div>
-          <div className="weather">{weather.weather[0].main}</div>
-        </div> */}
 
         <div id="mainData">
-          <div className="temperature">
-            {Math.round(oneData.main.temp)}°c
-          </div>
 
-          <div className="weatherDetails">
-
-            <div className="location">
-              {oneData.name},
-              {oneData.sys.country}
+          <div className="smallContainerWeather">
+            <div className="temperature">
+              {Math.round(oneData.main.temp)}°c
             </div>
 
-            <div className="timeAndDate">
-              <div className="time">{findDate}</div>
-              {/* {<div className="date">date</div>} */}
-            </div>
+            <div className="weatherDetails">
 
+              <div className="location">
+                {oneData.name}
+              </div>
+
+              <div className="timeAndDate">
+                <div className="time">15:22</div>
+                {<div className="date">11.22.2000</div>}
+              </div>
+
+
+            </div>
             <div className="weatherIconWrapper">
               <div className="weatherIcon">icon</div>
               <div className="weatherName">{oneData.weather["main"]}</div>
@@ -182,6 +178,8 @@ function App() {
 
           </div>
 
+          <hr />
+          
           <div className="asideWeatherData">
             <h3>Weather Details</h3>
 
@@ -197,7 +195,7 @@ function App() {
 
 
       </div>
-      {/* ) : ("")} */}
+
 
     </div>
 
