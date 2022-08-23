@@ -64,7 +64,7 @@ function App() {
     base: "https://api.openweathermap.org/data/2.5/"
   }
 
-  const [location, setLocation] = useState("")
+  const [location, setLocation] = useState("London")
   const [weather, setWeather] = useState({})
 
   const searchLocation = (e) => {
@@ -77,10 +77,20 @@ function App() {
     }
   }
 
-
-  const backgroundImage = {
-    backgroundImage: `url(${RainImage})`
+  const showCityData = (e) => {
+    let city = e.target.id
+    console.log(e)
+    console.log(city)
+    Axios.get(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`).then((res) => {
+      setWeather(res.data)
+      console.log("weather: " + weather.name)
+    })
+    setLocation('')
   }
+
+const backgroundImage = {
+  backgroundImage: `url(${RainImage})`
+}
 
 return (
   <div className="weatherApp" style={backgroundImage}>
@@ -125,12 +135,12 @@ return (
             </div>
           </div>
 
-          {/* <ul className="citiesList">
+          <ul className="citiesList">
             <li id="London" onClick={showCityData}>London</li>
             <li id="Rome" onClick={showCityData}>Rome</li>
             <li id="Berlin" onClick={showCityData}>Berlin</li>
-            <li id="New York" onClick={showCityData}>New York</li>
-          </ul> */}
+            <li id="Moscow" onClick={showCityData}>Moscow</li>
+          </ul>
         </div>
 
         <hr />
