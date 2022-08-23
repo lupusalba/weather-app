@@ -11,51 +11,6 @@ import ClearSkyImage from './Images/Backgrounds/clear-sky.jpg'
 
 
 
-const oneData = {
-  "coord": {
-    "lon": -85.1647,
-    "lat": 34.257
-  },
-  "weather": [
-    {
-      "id": 804,
-      "main": "Clouds",
-      "description": "overcast clouds",
-      "icon": "04d"
-    }
-  ],
-  "base": "stations",
-  "main": {
-    "temp": 26.76,
-    "feels_like": 29.14,
-    "temp_min": 26.12,
-    "temp_max": 28.05,
-    "pressure": 1011,
-    "humidity": 79
-  },
-  "visibility": 10000,
-  "wind": {
-    "speed": 2.57,
-    "deg": 320
-  },
-  "clouds": {
-    "all": 99
-  },
-  "dt": 1661189374,
-  "sys": {
-    "type": 2,
-    "id": 2009938,
-    "country": "US",
-    "sunrise": 1661166426,
-    "sunset": 1661214022
-  },
-  "timezone": -14400,
-  "id": 4219762,
-  "name": "Rome",
-  "cod": 200
-}
-
-
 
 
 function App() {
@@ -67,6 +22,18 @@ function App() {
   const [location, setLocation] = useState("London")
   const [weather, setWeather] = useState({})
 
+
+  // show default weather
+  useEffect(() => {
+    Axios.get(`${api.base}weather?q=Rome&units=metric&APPID=${api.key}`).then((res) => {
+      setWeather(res.data)
+      console.log("weather: " + weather.name)
+    })
+    setLocation('')
+  }, [])
+
+
+  // search location by keyboard input
   const searchLocation = (e) => {
     if (e.key === 'Enter') {
       Axios.get(`${api.base}weather?q=${location}&units=metric&APPID=${api.key}`).then((res) => {
@@ -77,100 +44,107 @@ function App() {
     }
   }
 
+  //show weather for defulte cites, onclick
   const showCityData = (e) => {
     let city = e.target.id
     console.log(e)
     console.log(city)
     Axios.get(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`).then((res) => {
       setWeather(res.data)
-      console.log("weather: " + weather.name)
+      console.log(weather)
     })
     setLocation('')
   }
 
-const backgroundImage = {
-  backgroundImage: `url(${RainImage})`
-}
+  const backgroundImage = {
+    backgroundImage: `url(${RainImage})`
+  }
 
-return (
-  <div className="weatherApp" style={backgroundImage}>
-    <div id="wrapper">
-      <div id="mainData">
-        <div className="smallContainerWeather">
-          <div className="temperature">
-            {weather.main ? Math.round(weather.main.temp) : null}°c
-          </div>
 
-          <div className="weatherDetails">
-            <div className="location">{weather ? weather.name : null}</div>
 
-            <div className="timeAndDate">
-              <div className="time">15:22</div>
-              {<div className="date">11.22.2000</div>}
+  return (
+    <div className="weatherApp" style={backgroundImage}>
+      <div id="wrapper">
+        <div id="mainData">
+          <div className="smallContainerWeather">
+            <div className="temperature">
+              {weather.main ? Math.round(weather.main.temp) : null}°c
             </div>
-          </div>
-          <div className="weatherIconWrapper">
-            <div className="weatherIcon">icon</div>
-            <div className="weatherName">
-              {weather.weather ? weather.weather[0].main : null}
+
+            <div className="weatherDetails">
+              <div className="location">{weather ? weather.name : null}</div>
+
+              <div className="timeAndDate">
+                <div className="time">
+                  {weather ? weather.dt : null}
+                </div>
+                {<div className="date">
+                  {weather ? weather.dt : null}
+                </div>}
+              </div>
+            </div>
+            <div className="weatherIconWrapper">
+              <div className="weatherIcon">icon</div>
+              <div className="weatherName">
+                {weather.weather ? weather.weather[0].main : null}
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="aside">
-        <div className="asideCities">
-          <div className="search">
-            <input
-              type="text"
-              className="searchBar"
-              placeholder="Search Location"
-              onChange={(e) => setLocation(e.target.value)}
-              value={location}
-              onKeyDown={searchLocation}
-            />
+        <div className="aside">
+          <div className="asideCities">
+            <div className="search">
+              <input
+                type="text"
+                className="searchBar"
+                placeholder="Search Location"
+                onChange={(e) => setLocation(e.target.value)}
+                value={location}
+                onKeyDown={searchLocation}
+              />
 
-            <div onClick={searchLocation}>
-              <img id="searchIcon" src={searchIcon} alt="Search" />
+              <div onClick={searchLocation}>
+                <img id="searchIcon" src={searchIcon} alt="Search" />
+              </div>
             </div>
+
+            <ul className="citiesList">
+              <li id="London" onClick={showCityData}>London</li>
+              <li id="Rome" onClick={showCityData}>Rome</li>
+              <li id="Berlin" onClick={showCityData}>Berlin</li>
+              <li id="Moscow" onClick={showCityData}>Moscow</li>
+            </ul>
           </div>
 
-          <ul className="citiesList">
-            <li id="London" onClick={showCityData}>London</li>
-            <li id="Rome" onClick={showCityData}>Rome</li>
-            <li id="Berlin" onClick={showCityData}>Berlin</li>
-            <li id="Moscow" onClick={showCityData}>Moscow</li>
-          </ul>
-        </div>
+          <hr />
 
-        <hr />
+          <div className="asideWeatherData">
+            <h3>Weather Details</h3>
 
-        <div className="asideWeatherData">
-          <h3>Weather Details</h3>
-
-          <ul className="weatherInfo">
-            <li>
-              <span>Humidity</span>
-              {weather.main ? weather.main.humidity : null}
-            </li>
-            <li>
-              <span>Minimal Temperature</span>
-              {weather.main ? weather.main.temp_min : null}
-            </li>
-            <li>
-              <span>Maximal Temperature</span>
-              {weather.main ? weather.main.temp_max : null}
-            </li>
-            <li>
-              <span>Wind Speed</span>
-              {weather.main ? weather.wind.speed : null}
-            </li>
-          </ul>
+            <ul className="weatherInfo">
+              <li>
+                <span>Humidity</span>
+                {weather.main ? weather.main.humidity : null}
+              </li>
+              <li>
+                <span>Minimal Temperature</span>
+                {weather.main ? weather.main.temp_min : null}
+              </li>
+              <li>
+                <span>Maximal Temperature</span>
+                {weather.main ? weather.main.temp_max : null}
+              </li>
+              <li>
+                <span>Wind Speed</span>
+                {weather.main ? weather.wind.speed : null}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
 }
 
 export default App;
