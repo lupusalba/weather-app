@@ -2,15 +2,13 @@
 import './App.css';
 import { useEffect, useState } from "react"
 import Axios from "axios"
+import Clock from './Clock.js';
+
 import searchIcon from "./Images/Icons/searchIcon.png"
 import RainImage from './Images/Backgrounds/rain1.jpg'
 import SnowImage from './Images/Backgrounds/snow.jpg'
 import CloudsImage from './Images/Backgrounds/clouds.jpg'
 import ClearSkyImage from './Images/Backgrounds/clear-sky.jpg'
-
-
-
-
 
 
 function App() {
@@ -75,8 +73,8 @@ function App() {
               <div className="location">{weather ? weather.name : null}</div>
 
               <div className="timeAndDate">
-                <div className="time">
-                  {weather ? weather.dt : null}
+                <div id="time" className="time">
+                  <Clock />
                 </div>
                 {<div className="date">
                   {weather ? weather.dt : null}
