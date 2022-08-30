@@ -36,7 +36,7 @@ function App() {
     if (e.key === 'Enter') {
       Axios.get(`${api.base}weather?q=${location}&units=metric&APPID=${api.key}`).then((res) => {
         setWeather(res.data)
-        console.log("weather: " + weather.name)
+        console.log(weather)
       })
       setLocation('')
     }
@@ -54,9 +54,21 @@ function App() {
     setLocation('')
   }
 
-  const backgroundImage = {
+  let backgroundImage = {
     backgroundImage: `url(${RainImage})`
   }
+
+switch (weather.weather ? weather.weather[0].main : "Rain"){
+  case "Clouds":
+    backgroundImage = { backgroundImage: `url(${CloudsImage})` }
+    break
+  case "Rain":
+    backgroundImage = { backgroundImage: `url(${RainImage})` }
+    break
+  default: 
+  backgroundImage = { backgroundImage: `url(${RainImage})` }
+  break
+}
 
 
 
@@ -82,7 +94,7 @@ function App() {
               </div>
             </div>
             <div className="weatherIconWrapper">
-              <div className="weatherIcon">icon</div>
+              <div className="weatherIcon"></div>
               <div className="weatherName">
                 {weather.weather ? weather.weather[0].main : null}
               </div>
